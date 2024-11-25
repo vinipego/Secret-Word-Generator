@@ -76,6 +76,17 @@ h2 {
   font-size: 20px;
 }
 
+.checkbox-descriptions:hover{
+  color: #d4c8e9;
+  cursor: pointer;
+}
+
+.checkbox-descriptions:active{
+  color: #d4c8e9;
+  cursor: pointer;
+  text-shadow: 0 0 1px black;
+}
+
 .individual-checkbox-wrapper input[type="checkbox"] {
   visibility: hidden;
   display: none;

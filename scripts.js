@@ -68,7 +68,7 @@ const symbolsMiniDb = [
   "~",
   "`",
   "!",
-  "@",
+  "/",
   "#",
   "$",
   "%",
@@ -93,9 +93,10 @@ const symbolsMiniDb = [
   ">",
   ".",
   "?",
-  "/",
+  "@",
 ];
 
+//
 // get input range slider elements
 const slideValue = document.querySelector("#slideShow");
 const inputSlider = document.querySelector("#rangeInpute");
@@ -108,22 +109,36 @@ const symbolsCbx = document.querySelector("#symbols-cbx");
 const lengthDescription = document.querySelector("#length-description");
 const newPasswordBtn = document.querySelector("#new-password-btn");
 const passwordOutput = document.querySelector("#password-output");
+const lowercaseCheckboxDescription = document.querySelector(
+  "#lowercase-checkbox-description"
+);
+const uppercaseCheckboxDescription = document.querySelector(
+  "#uppercase-checkbox-description"
+);
+const numbersCheckboxDescription = document.querySelector(
+  "#numbers-checkbox-description"
+);
+const symbolsCheckboxDescription = document.querySelector(
+  "#symbols-checkbox-description"
+);
+
+lowercaseCheckboxDescription.addEventListener("click", lowercaseCheckOrUncheck);
+uppercaseCheckboxDescription.addEventListener("click", uppercaseCheckOrUncheck);
+numbersCheckboxDescription.addEventListener("click", numbersCheckOrUncheck);
+symbolsCheckboxDescription.addEventListener("click", symbolsCheckOrUncheck);
+newPasswordBtn.addEventListener("click", generateNewPassword);
 
 lengthDescription.textContent = "Length:";
 
 // temp
 //
-//
-//
 passwordOutput.textContent = "1234qwer1234qwer1234";
 //
-//
-//
 
-let passwordLength = 0;
+let passwordLength = inputSlider.value;;
 // the Mini Databases will be concated into this variable according to what the user toggles.
 let passwordMiniDb = [];
-let generatedPassword = "";
+let generatedPassword = [];
 
 // having input range slider do input range slider things
 // it also grabs the value.
@@ -137,21 +152,58 @@ inputSlider.oninput = () => {
 inputSlider.onblur = () => {
   slideValue.classList.remove("show");
 };
+// functions to for the event listener that when clicked,
+// checks whether the checkboxes are checked or not
+//and checks them or unchecks them accordingly
+function lowercaseCheckOrUncheck() {
+  if (lowercaseCbx.checked == true) {
+    lowercaseCbx.checked = false;
+  } else {
+    lowercaseCbx.checked = true;
+  }
+}
 
-newPasswordBtn.addEventListener("click", generateNewPassword);
+function uppercaseCheckOrUncheck() {
+  if (uppercaseCbx.checked == true) {
+    uppercaseCbx.checked = false;
+  } else {
+    uppercaseCbx.checked = true;
+  }
+}
+
+function numbersCheckOrUncheck() {
+  if (numbersCbx.checked == true) {
+    numbersCbx.checked = false;
+  } else {
+    numbersCbx.checked = true;
+  }
+}
+function symbolsCheckOrUncheck() {
+  if (symbolsCbx.checked == true) {
+    symbolsCbx.checked = false;
+  } else {
+    symbolsCbx.checked = true;
+  }
+}
+
+
 
 function generateNewPassword() {
   clearPasswordOutput();
   formPoolOfCharacters();
   // console.log(passwordMiniDb);
   randomizePassword();
+  
 }
 
 function clearPasswordOutput() {
+  // passwordOutput.textContent = "Please select a group of characters";
   passwordOutput.textContent = "";
   passwordMiniDb = [];
+  generatedPassword = [];
 }
-
+//creates a new mini database with every character category
+//the user checked
 function formPoolOfCharacters() {
   if (lowercaseCbx.checked == true) {
     for (let i = 0; i < lowercaseMiniDb.length; i++) {
@@ -173,8 +225,19 @@ function formPoolOfCharacters() {
       passwordMiniDb.push(symbolsMiniDb[i]);
     }
   }
+ 
 }
 
-function randomizePassword(){
-  //continue from here
+function randomizePassword() {
+
+  for(let i = 0; i<passwordLength;i++){
+    generatedPassword.push(
+      passwordMiniDb[
+        Math.floor(Math.random()*passwordMiniDb.length)
+      ]
+    )
+  }
+  passwordOutput.textContent = generatedPassword.join("");
+
 }
+
