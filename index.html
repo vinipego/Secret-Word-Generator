@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Secret Word ❤︎</title>
+  </head>
+  <body>
+    <!-- start of app wrapper -->
+    <div class="secret-word-app-wrapper">
+      <h1>Generate a <span class="title-color-styling">Secret Word</span></h1>
+      <h2>Tailored to <span class="title-color-styling">Your Needs</span></h2>
+
+      <!--  -->
+      <!--  -->
+      <!--  -->
+      <!-- Middle Section Area || Operators Area -->
+      <div class="operators-wrapper">
+
+
+        
+        <!-- start of toggle checker -->
+        <div class="checkbox-wrapper">
+          <div class="individual-checkbox-wrapper">
+            <input type="checkbox" id="lowercase-cbx" />
+            <label for="lowercase-cbx" class="toggle"><span></span></label>
+            <p class="checkbox-descriptions">Lowercase</p>
+          </div>
+
+          <div class="individual-checkbox-wrapper">
+            <input type="checkbox" id="uppercase-cbx" />
+            <label for="uppercase-cbx" class="toggle"><span></span></label>
+            <p class="checkbox-descriptions">Uppercase</p>
+          </div>
+
+          <div class="individual-checkbox-wrapper">
+            <input type="checkbox" id="numbers-cbx" />
+            <label for="numbers-cbx" class="toggle"><span></span></label>
+            <p class="checkbox-descriptions">Numbers</p>
+          </div>
+
+          <div class="individual-checkbox-wrapper">
+            <input type="checkbox" id="symbols-cbx" />
+            <label for="symbols-cbx" class="toggle"><span></span></label>
+            <p class="checkbox-descriptions">Symbols</p>
+          </div>
+          <!-- end of toggle checker -->
+        </div>
+
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!-- start of input range selector -->
+        <div class="input-range-slider">
+            <p id="length-description"></p>
+            <div class="range">
+              <div class="sliderValue">
+                  <span id="slideShow">8</span>
+              </div>
+              <div class="field">
+                  <div class="value left">4</div>
+                  <input type="range" min="4" max="20" value="8" steps="1" id="rangeInpute">
+                  <div class="value right">20</div>
+              </div>
+          </div>
+        </div>
+        
+        <!-- end of input range selector -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+
+        <!-- end of operators-wrapper -->
+      </div>
+
+      <!--  -->
+      <!--  -->
+      <!--  -->
+      <!-- new password section -->
+      <div class="new-password-wrapper">
+        <button id="new-password-btn">New Secret Word</button>
+        <output id="password-output"></output>
+      </div>
+
+      <!-- end of app wrapper -->
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
