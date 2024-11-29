@@ -17,33 +17,44 @@
       <!--  -->
       <!-- Middle Section Area || Operators Area -->
       <div class="operators-wrapper">
-
-
-        
         <!-- start of toggle checker -->
         <div class="checkbox-wrapper">
           <div class="individual-checkbox-wrapper">
             <input type="checkbox" id="lowercase-cbx" />
             <label for="lowercase-cbx" class="toggle"><span></span></label>
-            <p id="lowercase-checkbox-description" class="checkbox-descriptions">Lowercase</p>
+            <p
+              id="lowercase-checkbox-description"
+              class="checkbox-descriptions"
+            >
+              Lowercase
+            </p>
           </div>
 
           <div class="individual-checkbox-wrapper">
             <input type="checkbox" id="uppercase-cbx" />
             <label for="uppercase-cbx" class="toggle"><span></span></label>
-            <p id="uppercase-checkbox-description" class="checkbox-descriptions">Uppercase</p>
+            <p
+              id="uppercase-checkbox-description"
+              class="checkbox-descriptions"
+            >
+              Uppercase
+            </p>
           </div>
 
           <div class="individual-checkbox-wrapper">
             <input type="checkbox" id="numbers-cbx" />
             <label for="numbers-cbx" class="toggle"><span></span></label>
-            <p id="numbers-checkbox-description" class="checkbox-descriptions">Numbers</p>
+            <p id="numbers-checkbox-description" class="checkbox-descriptions">
+              Numbers
+            </p>
           </div>
 
           <div class="individual-checkbox-wrapper">
-            <input type="checkbox" id="symbols-cbx"/>
+            <input type="checkbox" id="symbols-cbx" />
             <label for="symbols-cbx" class="toggle"><span></span></label>
-            <p id="symbols-checkbox-description" class="checkbox-descriptions">Symbols</p>
+            <p id="symbols-checkbox-description" class="checkbox-descriptions">
+              Symbols
+            </p>
           </div>
           <!-- end of toggle checker -->
         </div>
@@ -54,19 +65,26 @@
         <!--  -->
         <!-- start of input range selector -->
         <div class="input-range-slider">
-            <p id="length-description"></p>
-            <div class="range">
-              <div class="sliderValue">
-                  <span id="slideShow">8</span>
-              </div>
-              <div class="field">
-                  <div class="value left">4</div>
-                  <input type="range" min="4" max="20" value="8" steps="1" id="rangeInpute">
-                  <div class="value right">20</div>
-              </div>
+          <p id="length-description"></p>
+          <div class="range">
+            <div class="sliderValue">
+              <span id="slideShow">8</span>
+            </div>
+            <div class="field">
+              <div class="value left">4</div>
+              <input
+                type="range"
+                min="4"
+                max="20"
+                value="8"
+                steps="1"
+                id="rangeInput"
+              />
+              <div class="value right">20</div>
+            </div>
           </div>
         </div>
-        
+
         <!-- end of input range selector -->
         <!--  -->
         <!--  -->
@@ -82,7 +100,11 @@
       <!-- new password section -->
       <div class="new-password-wrapper">
         <button id="new-password-btn">New Secret Word</button>
-        <output id="password-output"></output>
+        <div class="tooltip">
+          <output id="password-output"></output>
+          <span class="tooltiptext-hover">Click to Copy</span>
+          <span class="tooltiptext-clicked">Copied! 🗐</span>
+        </div>
       </div>
 
       <!-- end of app wrapper -->

@@ -99,7 +99,7 @@ const symbolsMiniDb = [
 //
 // get input range slider elements
 const slideValue = document.querySelector("#slideShow");
-const inputSlider = document.querySelector("#rangeInpute");
+const inputSlider = document.querySelector("#rangeInput");
 // get checkbox toggles elements
 const lowercaseCbx = document.querySelector("#lowercase-cbx");
 const uppercaseCbx = document.querySelector("#uppercase-cbx");
@@ -130,15 +130,22 @@ newPasswordBtn.addEventListener("click", generateNewPassword);
 
 lengthDescription.textContent = "Length:";
 
-// temp
-//
-passwordOutput.textContent = "1234qwer1234qwer1234";
-//
-
-let passwordLength = inputSlider.value;;
+let passwordLength = inputSlider.value;
 // the Mini Databases will be concated into this variable according to what the user toggles.
 let passwordMiniDb = [];
 let generatedPassword = [];
+let containLowercase = false;
+let containUppercase = false;
+let containNumbers = false;
+let containSymbols = false;
+
+
+passwordOutput.addEventListener("click", copyPassword);
+
+function copyPassword() {
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(passwordOutput.textContent);
+}
 
 // having input range slider do input range slider things
 // it also grabs the value.
@@ -186,14 +193,13 @@ function symbolsCheckOrUncheck() {
   }
 }
 
-
-
 function generateNewPassword() {
   clearPasswordOutput();
   formPoolOfCharacters();
-  // console.log(passwordMiniDb);
-  randomizePassword();
-  
+  do {
+    randomizePassword();
+  } while (checkValidity() == false);
+  passwordOutput.textContent = generatedPassword.join("");
 }
 
 function clearPasswordOutput() {
@@ -205,39 +211,66 @@ function clearPasswordOutput() {
 //creates a new mini database with every character category
 //the user checked
 function formPoolOfCharacters() {
-  if (lowercaseCbx.checked == true) {
-    for (let i = 0; i < lowercaseMiniDb.length; i++) {
-      passwordMiniDb.push(lowercaseMiniDb[i]);
-    }
+  passwordMiniDb = [];
+  if (lowercaseCbx.checked) {
+    passwordMiniDb = passwordMiniDb.concat(lowercaseMiniDb);
   }
-  if (uppercaseCbx.checked == true) {
-    for (let i = 0; i < uppercaseMiniDb.length; i++) {
-      passwordMiniDb.push(uppercaseMiniDb[i]);
-    }
+  if (uppercaseCbx.checked) {
+    passwordMiniDb = passwordMiniDb.concat(uppercaseMiniDb);
   }
-  if (numbersCbx.checked == true) {
-    for (let i = 0; i < numbersMiniDb.length; i++) {
-      passwordMiniDb.push(numbersMiniDb[i]);
-    }
+  if (numbersCbx.checked) {
+    passwordMiniDb = passwordMiniDb.concat(numbersMiniDb);
   }
-  if (symbolsCbx.checked == true) {
-    for (let i = 0; i < symbolsMiniDb.length; i++) {
-      passwordMiniDb.push(symbolsMiniDb[i]);
-    }
+  if (symbolsCbx.checked) {
+    passwordMiniDb = passwordMiniDb.concat(symbolsMiniDb);
   }
- 
 }
 
 function randomizePassword() {
-
-  for(let i = 0; i<passwordLength;i++){
+  generatedPassword = [];
+  for (let i = 0; i < passwordLength; i++) {
     generatedPassword.push(
-      passwordMiniDb[
-        Math.floor(Math.random()*passwordMiniDb.length)
-      ]
-    )
+      passwordMiniDb[Math.floor(Math.random() * passwordMiniDb.length)]
+    );
   }
-  passwordOutput.textContent = generatedPassword.join("");
-
 }
 
+// Check if the generated password includes the required character groups
+//inpired by: https://dev.to/askyt/check-if-array-contains-any-element-of-another-array-in-js-583i
+function checkValidity() {
+  if (lowercaseCbx.checked == true) {
+    containLowercase = containsAny(lowercaseMiniDb);
+  } else {
+    containLowercase = !containsAny(lowercaseMiniDb);
+  }
+  if (uppercaseCbx.checked == true) {
+    containUppercase = containsAny(uppercaseMiniDb);
+  } else {
+    containUppercase = !containsAny(uppercaseMiniDb);
+  }
+  if (numbersCbx.checked == true) {
+    containNumbers = containsAny(numbersMiniDb);
+  } else {
+    containNumbers = !containsAny(numbersMiniDb);
+  }
+  if (symbolsCbx.checked == true) {
+    containSymbols = containsAny(symbolsMiniDb);
+  } else {
+    containSymbols = !containsAny(symbolsMiniDb);
+  }
+
+  if (
+    containLowercase == true &&
+    containUppercase == true &&
+    containNumbers == true &&
+    containSymbols == true
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function containsAny(arr) {
+  return generatedPassword.some((item) => arr.includes(item));
+}
